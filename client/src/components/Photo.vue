@@ -1,5 +1,5 @@
 <template>
-  <img class="phot" v-bind:src="'/img/' + src">
+    <img class="phot" v-bind:src="'/img/' + src">
 </template>
 
 <script>
@@ -8,9 +8,13 @@ import $ from "jQuery"
 export default {
     name: "Photo",
     props: ["src"],
-    mounted() {
-        $(".phot").on("click", function() {
-            console.log("caca");
+    created() {
+        $(".phot").unbind().on("click", (e) => {
+            const src = e.currentTarget.currentSrc;
+            $(".ph").children().attr("src", "");
+            $(".ph").children().attr("src", src);
+            $(".popup").css({visibility: "visible"});
+            $("#i").css({height: "90vh"});
         })
     }
 }
@@ -18,6 +22,7 @@ export default {
 
 <style scoped>
 img {
+    cursor: pointer;
     width: 50%;
     padding-top: 10px;
     padding-bottom: 10px;

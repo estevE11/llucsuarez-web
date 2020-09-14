@@ -34,7 +34,7 @@ export default {
             desc: "Photography & Filmmaking"
         }
     },
-    mounted() {
+    created() {
         $(".scroll-button a").on("click", e => {
             console.log(e)
             const hash = e.currentTarget.hash;
