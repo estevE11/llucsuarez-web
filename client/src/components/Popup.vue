@@ -1,26 +1,31 @@
 <template>
     <div class="popup" id="#pop">
-            <div class="back"></div>
+            <div class="back" @click="close"></div>
             <div class="ph">
                 <img id="i" v-bind:src="src">
-                <div class="pop-close">
-                    X
+                <div class="pop-close" @click="close">
+                    
                 </div>
             </div>
     </div>
 </template>
 
 <script>
-import $ from "jQuery"
+import $ from "jquery"
 
 export default {
         name: "Popup",
         props: ["src"],
         created: () => {
-            $(".pop-close").on("click", () => {
-                $(".popup").css({visibility: "hidden"});
+        },
+        methods: {
+            close() {
                 $("#i").css({height: "0vh"});
-            })
+                $(".back").css({opacity: "0%"})
+                setTimeout(() => {
+                    $(".popup").css({visibility: "hidden"})
+                }, 150);
+            }
         }
 }
 </script>
@@ -32,7 +37,9 @@ export default {
     width: 100%;
     height: 100%;
     background-color: black;
-    opacity: 80%;
+    opacity: 0%;
+
+    transition: opacity .2s;
 }
 
 .popup {

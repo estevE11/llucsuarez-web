@@ -1,21 +1,25 @@
 <template>
-    <img class="phot" v-bind:src="'/img/' + src">
+    <img @click="showPopup" class="phot" v-bind:src="'/img/' + src">
 </template>
 
 <script>
-import $ from "jQuery"
+import $ from "jquery"
 
 export default {
     name: "Photo",
     props: ["src"],
     created() {
-        $(".phot").unbind().on("click", (e) => {
+    },
+    methods: {
+        showPopup(e) {
             const src = e.currentTarget.currentSrc;
+            console.log(src);
             $(".ph").children().attr("src", "");
             $(".ph").children().attr("src", src);
             $(".popup").css({visibility: "visible"});
+            $(".back").css({opacity: "80%"})
             $("#i").css({height: "90vh"});
-        })
+        }
     }
 }
 </script>
